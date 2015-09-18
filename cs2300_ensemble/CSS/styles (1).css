@@ -1,0 +1,129 @@
+/*
+Changes 4/15/15 by Brendan: Created document, added journal font
+Change 4/27/15 by Brendan: Added style for email bar
+Change 5/6/15 by Brendan: Implemented styles to allow for resizing images
+*/
+@font-face {
+	font-family: journal;
+	src: url('fonts/journal.ttf') format('truetype');
+}
+body {
+	background-color: #fffeee;
+	font-family: 'Questrial', sans-serif;
+}
+h1 {
+	line-height: 1.3em;
+	font-size: 7em;
+	font-weight: 300;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+html, body{
+  height: 100%;
+}
+pre {
+	display: inline;
+}
+#bodyDiv {
+	text-align: left;
+	padding-left: 5%;
+	padding-right: 5%;
+	vertical-align: top;
+	height: 60%;
+	width: 55%;
+	overflow-y: scroll;
+	overflow-x: auto;
+}
+#searchDiv {
+	text-align: left;
+}
+#emailBar {
+
+}
+#searchBar {
+	margin-bottom: 2%;
+}
+#stitchCollection {
+	font-size: 2.4em;
+	color: #7F7F7F;
+	text-decoration: none;
+}
+#stitchCollection:hover {
+	font-size: 2.4em;
+	color: #7F7F7F;
+	text-decoration: underline;
+}
+#stitchCollection:visited {
+	font-size: 2.4em;
+	color: #7F7F7F;
+	text-decoration: none;
+}
+#topNav {
+	text-align: center;
+	border-bottom-width	: 1px;
+	border-left-width	: 0px;
+	border-right-width	: 0px;
+	border-top-width	: 0px;
+	border-color: #BAD08D;
+	border-style: solid;
+}
+.about {
+	font-size: 1.2em;
+	color: #7F7F7F;
+	text-decoration: none;
+}
+.about:hover {
+	color: #7F7F7F;
+	text-decoration: underline;
+}
+.about:visited {
+	color: #7F7F7F;
+	text-decoration: none;
+}
+.bottomLink {
+	font-size: 1.8em;
+	color: #7F7F7F;
+	text-decoration: none;
+}
+.bottomLink:hover {
+	font-size: 1.8em;
+	color: #7F7F7F;
+	text-decoration: underline;
+}
+.bottomLink:visited {
+	font-size: 1.8em;
+	color: #7F7F7F;
+	text-decoration: none;
+}
+.centeredDiv {
+	margin-left: auto;
+	margin-right: auto;
+	width: 65%;
+	text-align: center;
+	vertical-align: middle;
+}
+.contentDiv {
+	line-height: 1em;
+	font-size: 1.1em;
+	display: inline-block;
+	width: 100%;
+}
+.contentTags {
+	font-size: .8em;
+}
+.contentThumb {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin-right: 30px;
+	border: 3px;
+	border-color: #82A5CD;
+	border-style: solid;
+}
+.journal {
+	font-family: 'journal';
+}
+.questrial {
+	font-family: 'Questrial', sans-serif;
+}

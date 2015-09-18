@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<!-- Load the d3 library. -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="RadarChart.js"></script>
+<script src="bubble.js"></script>
+<style>
+@font-face{
+  font-family: hobostd;
+  src: url('HoboStd.otf');
+}
+/* put a border around the svg element so we can see the coordinate system better. */
+body { font-family: "Open Sans"; } div { text-align: center; } h3 { font-family: "hobostd"; font-size: 30pt; margin-top: 10px; margin-bottom: 0px; }
+/* The default styles for axis elements stink. What should they be? */
+.axis path {fill: none; stroke: #777777}
+.axis line {stroke: #777777}
+#content{width: 1200px;margin-left: auto; margin-right: auto}
+#keySVG {float: right; position: relative; top: 30px;}
+#subtext {font-size: 10pt;}
+</style>
+</head>
+<body>
+
+<!--<div id="heading">-->
+<div id="content">
+<h3>Nutritional Comparison of Breakfast Cereals</h3>
+<p>The graph below shows the top 10 best-selling breakfast cereals of 2013. </p>
+</div>
+
+
+<script>
+/******** The enclosed code was originally part of bubble.js. We have put it here for simplicity of code *******/
+var diameter = 700,
+    format = d3.format(",d"),
+    color = d3.scale.category20c();
+
+var bubble = d3.layout.pack()
+    .sort(null)
+    .size([diameter, diameter])
+    .padding(25);
+
+var svg = d3.select("#content").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+	.style("float", "left")
+    .attr("class", "bubble");
+/******** Code which is not ours ends here  **********/
+var nodeGlobal;
+//Creates structure to contain chart legend/key
+var key_svg = d3.select("#content").append("svg")
+    .attr("width", 450)
+    .attr("height", 600)
+    .style("border", "solid black 1px")
+    .attr("x", 800)
+    .attr("y", 0)
+    .attr("class", "key")
+    .attr("id", "keySVG");
+
+key_svg.append("g")
+    .attr("class", "node")
+    .attr("id", "key1")
+    .attr("transform", "translate (225,225), scale(.8)");
+
+var node = d3.select("#key1")
+
+//Key title
+node.append("text").text("Key")
+  .attr("transform", "translate (-22, -235)")
+  .style("font-weight", "bold")
+  .style("font-family", "hobostd")
+  .style("font-size", "20pt");
+
+node.append("circle")
+    .attr("r", 130)
+    .style("fill", "green");
+
+//Pulls cereal data	
+d3.json("cereals.json", function(error, root) {
+  //Creates the bubble chart of circles for the chart			
+  BubbleChart.make(root);
+
+  var maxCalories = d3.max(root, 
+      function (d) {
+        return d.calories;
+      });
+	//Determines the highest value among cereals for each category.  
+  var maxProtein = d3.max(root, 
+    function (d) {
+      return d.protein;
+    });
+  var maxFat = d3.max(root, 
+    function (d) {
+      return d.fat;
+    });
+  var maxFiber = d3.max(root, 
+    function (d) {
+      return d.fiber;
+    });
+  var maxCarbo = d3.max(root, 
+    function (d) {
+      return d.carbo;
+    });
+  var maxSugars = d3.max(root, 
+    function (d) {
+      return d.sugars;
+    });
+
+  var maxSales = d3.max(root, 
+    function (d) {
+      return d.value;
+    });
+	
+	//Key text for nutritional  information
+  node.append("text").text("Axis Scales")
+    .style("font-weight", "bold")
+    .style("font-size", "12pt")
+    .style("font-family", "hobostd")
+    .attr("transform", "translate (-190, 205)");
+
+  node.append("text").text("Fiber: 0 - " + maxFiber +"g")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (-190, 230)");
+
+  node.append("text").text("Fat: 0 - " + maxFat +"g")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (-190, 245)");
+
+  node.append("text").text("Protein: 0 - " + maxProtein +"g")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (-190, 260)");
+
+  node.append("text").text("Calories: 0 - " + maxCalories)
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (-190, 275)");
+
+  node.append("text").text("Sugars: 0 - " + maxSugars +"g")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (-190, 290)");
+
+  node.append("text").text("Carbohydrates: 0 - " + maxCarbo+"g")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (-190, 305)");
+
+  node.append("text").text("Circle Size")
+    .style("font-weight", "bold")
+    .style("font-size", "12pt")
+    .style("font-family", "hobostd")
+    .attr("transform", "translate (-190, 330)");
+
+  node.append("text").text("Sales: $0 - $555,897,000")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (-190, 350)");
+
+	//Key for manufacturer colors
+  node.append("text").text("Manufacturer by Color")
+    .style("font-weight", "bold")
+    .style("font-size", "12pt")
+    .style("font-family", "hobostd")
+    .attr("transform", "translate (50, 205)");
+
+  node.append("rect")
+    .attr("x", 60)
+    .attr("y", 220)
+    .style("fill", "#ff3a3a")
+    .attr("width", 15)
+    .attr("height", 15);
+
+  node.append("text").text("Post")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (80, 232)");
+
+  node.append("rect")
+    .attr("x", 60)
+    .attr("y", 240)
+    .style("fill", "#ff8d3d")
+    .attr("width", 15)
+    .attr("height", 15);
+
+  node.append("text").text("Kelloggs")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (80, 252)");
+
+  node.append("rect")
+    .attr("x", 60)
+    .attr("y", 260)
+    .style("fill", "#60a2cc")
+    .attr("width", 15)
+    .attr("height", 15);
+
+  node.append("text").text("General Mills")
+    .style("font-weight", "bold")
+    .style("font-size", "10pt")
+    .attr("transform", "translate (80, 272)");
+
+	//Explains what each chart represents as a whole
+  node.append("text").text("The right side of each chart represents healthier qualities")
+    .style("font-size", "12pt")
+    .style("font-weight", "bold")
+    .attr("transform", "translate (-262, -200)");
+
+  node.append("text").text("while the left denotes unhealhier qualities")
+    .style("font-size", "12pt")
+    .style("font-weight", "bold")
+    .attr("transform", "translate (-185, -183)");
+
+    d = [];
+    names = [];
+
+    //creating correct data format for chart
+    for (var i = 0; i < root.length; i++) {
+      var cereal = [ 
+          {axis: "Carb", value: (root[i].carbo/maxCarbo)},
+          {axis: "Pr", value: (root[i].protein/maxProtein)},
+          {axis: "Fi", value: (root[i].fiber/maxFiber)},
+          {axis: "Cal", value: (root[i].calories/maxCalories)},
+          {axis: "Fat", value: (root[i].fat/maxFat)},
+          {axis: "Sug", value: (root[i].sugars/maxSugars)}
+          ];
+      d.push(cereal);
+
+      names.push(root[i].name);
+    }
+
+	//Dummy data for key radar chart
+    key_data = [
+          [ 
+          {axis: "Carbohydrates", value: 1},
+          {axis: "Protein", value: 1},
+          {axis: "Fiber", value: 1},
+          {axis: "Calories", value: 1},
+          {axis: "Fat", value: 1},
+          {axis: "Sugars", value: 1}
+          ]
+          ];
+
+   
+});
+
+d3.select(self.frameElement).style("height", diameter + "px");
+
+window.onload = function(){
+	//Creates each radar chart scaled to its corresponding circle
+	//Waits until the window loads so items created using javascript
+	//can be referencedd
+  var colorscale = d3.scale.category10();
+
+  for (var i =0; i<d.length; i++){
+    var mycfg = {
+    radius: 5,
+    factor: 1,
+    factorLegend: .85,
+    levels: 6,
+    maxValue: 1,
+    radians: 2 * Math.PI,
+    opacityArea: 0.5,
+    ToRight: 5,
+    TranslateX: 80,
+    TranslateY: 30,
+    ExtraWidthX: 100,
+    ExtraWidthY: 100,
+    color: d3.scale.category10()
+    }
+
+  //Personalized variables to pass to the chart
+  var id = "#cereal" + i;
+  mycfg.w = $(id).children("circle").attr("r")*2;
+  mycfg.h = $(id).children("circle").attr("r")*2;
+	// Call function to draw the Radar chart
+  RadarChart.draw(id, [d[i]], mycfg, true);
+
+  //Appends the name of the corresponding cereal to each chart
+  var g = d3.select(id);
+  g.append("text").text(names[i])
+    .attr("dy", ($(id).children("circle").attr("r")/17) + "em")
+    .style("font-size", ".8em")
+    .style("text-anchor", "middle")
+    .style("font-family", "hobostd")
+    .style("font-weight", "bold");
+
+  }
+//Creates key chart
+  var mycfg = {
+    radius: 5,
+    factor: 1,
+    factorLegend: .85,
+    levels: 6,
+    maxValue: 1,
+    radians: 2 * Math.PI,
+    opacityArea: 0.5,
+    ToRight: 5,
+    TranslateX: 300,
+    TranslateY: 300,
+    ExtraWidthX: 100,
+    ExtraWidthY: 100,
+    color: d3.scale.category10()
+  }
+  mycfg.w = $("#key1").children("circle").attr("r")*2;
+  mycfg.h = $("#key1").children("circle").attr("r")*2;
+  RadarChart.draw("#key1", key_data, mycfg, true);
+  //Makes Key legend more readable/cleaner
+  $("#key1 .legend").css("font-size", "14px");
+   $("#key1 .legend").attr("transform", "translate(0, -15)");
+}
+
+</script>
+
+</body>
+</html>

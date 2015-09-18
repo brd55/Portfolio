@@ -1,0 +1,242 @@
+
+.clearfix{clear:both;}
+
+.wrapper,
+#main{
+	margin: 0 auto;
+	position: relative;
+}
+
+body{
+	background: #ececec url(../pictures/main-pattern.png);
+	color:#888;
+}
+
+
+#nav>li>a:hover{
+	background: #303232;
+	background: rgba(0,0,0,0.2);
+	border-bottom: solid #1c1d1d 5px;
+}
+
+header{
+	position: relative;
+	height: 220px;
+	background: url(../pictures/header.png) repeat-x center center;
+}
+#h1{ 
+	position: absolute;
+	left: 10px;
+    top: 1px;
+	color:white;
+	font:  bold 150% Georgia, serif;
+    text-align: left;
+    margin-right: 20%;
+}
+nav{
+	float: right;
+	line-height: 1.8em;
+}
+
+/*nav{
+	position: relative;
+
+}*/
+
+nav a{
+	text-decoration: none;
+	color: #acacac;
+}
+
+#nav {
+	margin-top: 107px;
+}
+
+#nav li{
+	display: inline;
+	font-size: 16px;
+	float: left;
+}
+
+#nav>li>a{
+	display:block;
+	overflow: hidden;
+	padding: 5px 10px 0px 10px;
+	color: #f5f5f5;
+	background: rgba(0,0,0,0.0);
+
+	text-shadow: 0 -1px rgba(0,0,0,0.5);
+	transition: all 0.3s ease;
+}
+
+/*.photos{
+	position: relative;
+
+  background-image: url("../pictures/background2.jpg");
+  text-align: center;
+	font-size: 50px;
+	background-position: center center;
+    background-size: contain;
+    color: white;
+
+}*/
+
+#main_form {
+  background-color: rgb(18,40,45);
+
+
+  margin: 5px;
+  padding-bottom: 10px;
+  border-style: solid;
+    border-color: rgb(130,235,138);
+    background-size: 48% auto;
+    position: relative;
+    left: 33%;
+    top: 130%;
+    width:  33%; 
+    
+text-align: center;
+margin-bottom: 10px;
+
+
+border-width: 5px;
+background-color: white;
+font-size: 20px;
+overflow: hidden;
+}
+
+#album_photos {
+  background-color: rgb(18,40,45);
+
+
+  margin: 5px;
+  padding-bottom: 10px;
+  padding-left: 35%;
+  border-style: solid;
+    border-color: rgb(130,235,138);
+    background-size: 48% auto;
+    position: relative;
+    left: 0%;
+    top: 130%;
+    width:  98%; 
+    
+
+margin-bottom: 80px;
+
+
+border-width: 5px;
+
+font-size: 20px;
+overflow: hidden;
+}
+
+.album_photos {
+  background-color: rgb(18,40,45);
+
+
+  margin: 5px;
+  padding-bottom: 10px;
+  padding-left: 35%;
+  border-style: solid;
+    border-color: rgb(130,235,138);
+    background-size: 48% auto;
+    position: relative;
+    left: 0%;
+    top: 130%;
+    width:  98%; 
+    
+
+margin-bottom: 80px;
+
+
+border-width: 5px;
+
+font-size: 20px;
+overflow: hidden;
+}
+
+
+
+/*#main #content{
+	position: relative;
+	display: block;
+	width: 852px;
+	float: left;
+	background: #f5f5f5;
+
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
+}*/
+
+.top_bar a:link {
+    color: white;
+    font:  bold 25px/40px Georgia, serif;
+    margin: 10px;
+}
+
+
+.top_bar a:visited {
+    color: white;
+    font:  bold 25px/40px Georgia, serif;
+}
+.top_bar{
+  background-color: black;
+  position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height:auto;
+    width: 100%;
+    padding-bottom: 10px;
+  
+
+    text-align: left;
+
+    opacity: 0.8;
+    z-index: +2;
+    
+   
+}
+.top_bar form{
+   
+  position: fixed;
+  left: 80%;
+    bottom: 5px;
+    height:auto;
+    width: 100%;
+    
+
+    opacity: 1;
+  
+}
+
+div.overlay {
+  /* Position the overlay absolutely in
+   * the top-left corner of the box */
+  position: absolute;
+  
+  /* Set the size to match the box */
+  width: 300px;
+  height: 300px;
+  
+  /* Initially invisible */
+  display: none;
+  visibility: hidden;
+  
+  /* Increase contrast between image and text */
+  background-color: rgba(0,0,0,0.5);
+  
+  /* Format the text */
+  color: rgba(255,255,255,1);
+  font-size: 100%;
+}
+/* Center the paragraph in the overlay */
+div.overlay p {
+  margin-top: 25%;
+  text-align: center;
+}
+
+/* Only display overlay when box is hovered */
+div.photos:hover div.overlay {
+  /* Set to visible */
+  display: block;
+  visibility: visible;
+}

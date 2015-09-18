@@ -1,0 +1,58 @@
+body {
+	background-color: #000713;
+}
+li {
+    list-style-position:inside;
+}
+#albumlinks{
+	margin-left: auto;
+	margin-right: auto;
+}
+#logo {
+	margin-bottom: 5px;
+}
+#main {
+	padding-top: 6px;
+	width: 950px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #f0f0f0;
+	text-align: center;
+	min-height: 850px;
+}
+#messageNewName {
+	width: 20px;
+	display: block;
+}
+#nav{
+	margin-left: auto;
+	margin-right: auto;
+}
+.album{
+	max-width: 650px;
+}
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+.field {
+	text-align: right;
+}
+.hidden {
+	display: none;
+}
+.link{
+	text-align: center;
+	width: 200px;
+}
+.message {
+	text-align: left;
+}
+.photothumb {
+	width: 145px;
+	height: 145px;
+}
+.search{
+	margin-left: auto;
+	margin-right: auto;
+}

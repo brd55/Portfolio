@@ -1,0 +1,118 @@
+#actualleft {
+	position: relative;
+	top: 50%;
+	margin-top: -20px;
+}
+#actualright {
+	position: relative;
+	top: 50%;
+	margin-top: -20px;
+	border: none
+	outline: none;
+}
+#arrowleft {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -295px;
+	margin-top: 18px;
+	z-index: 4;
+	height: 80px;
+	width: 80px;
+	text-align: center;
+	background-color: #262626;
+	opacity: 0.3;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#arrowleft:hover {
+	opacity: 0.7;
+	cursor: pointer;
+	 -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
+    /* Not implemented yet */
+    -o-user-select: none;
+    user-select: none;    
+}
+#arrowright {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: 225px;
+	margin-top: 18px;
+	z-index: 4;
+	height: 80px;
+	width: 80px;
+	text-align: center;
+	background-color: #262626;
+	opacity: 0.3;
+	 -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
+    /* Not implemented yet */
+    -o-user-select: none;
+    user-select: none;   
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;	
+}
+#arrowright:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+#bigbg {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 2;
+	height: 100%;
+	width: 100%;
+	opacity: 0.5;
+	background-color: #262626;
+}
+#caption{
+	z-index: 4;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	background-color: white;
+}
+.bigimg {
+	border: 1px solid #000000;
+	max-width: 600px;
+	max-height: 600px;
+	margin-bottom: 0px;
+}
+.bigimgdiv {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -300px;
+	margin-top: -175px;
+	z-index: 3;
+	border: 5px solid #ffffff;
+	padding-bottom: 0px;
+	line-height: 0px;
+	
+}
+.gallerythumb
+	{
+	vertical-align: top;
+	text-align: center;
+	padding: 3px;
+	}
+.photothumb {
+	border: 1px solid #ffffff;
+	-moz-box-shadow: 2px 2px 4px #555555, -1px -1px 1px #555555;
+	-webkit-box-shadow: 2px 2px 4px #555555, -1px -1px 1px #555555;
+	box-shadow: 2px 2px 4px #555555, -1px -1px 1px #555555;
+	width: 145px;
+	height: 145px;
+}
+.photothumb:hover {
+	cursor: pointer;
+}

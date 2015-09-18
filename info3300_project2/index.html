@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,800' rel='stylesheet' type='text/css'>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+        <script src="http://d3js.org/topojson.v1.min.js"></script>
+        <script src="slider_functions.js"></script>
+        <script src="trace_functions.js"></script>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <script src="tweets.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                    -webkit-box-sizing: border-box;
+                       -moz-box-sizing: border-box;
+                            box-sizing: border-box;
+            }
+            html, body {
+                font-family: sans-serif;
+                font-weight: 100;
+				width: 100%;
+                height: 100%;
+                background-color: rgb(233, 233, 236);
+            }
+			svg {   
+                    margin-top: 10px;
+					margin-left:auto; 
+					margin-right: auto; 
+					display:block;
+				}
+            h1, h2, h3, h4, h5, h6 {
+                font-weight: 100;
+            }
+			#displayTweet {
+				width: 500px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			#tweetContainer {
+				display: inline-block;
+				text-align: center;
+				min-height: 300px;
+				color: white;
+                padding: 20px 20px;
+				float: left;
+			}
+                #tweetContainer #sam_explained {
+                    text-align: justify;
+                }
+            #main {
+				float: right;
+                margin-right: auto;
+                margin-left: auto;
+                text-align: center;
+				line-height: .8em;
+            }
+            .range {
+                width: 500px;
+            }
+
+            .stroke {
+                fill: none;
+                stroke: #000;
+                stroke-width: 3px;
+            }
+
+            .fill {
+                fill: #b8c9db;
+            }
+
+            .graticule {
+                fill: none;
+                stroke: #777;
+                stroke-width: .5px;
+                stroke-opacity: .5;
+            }
+
+            .land {
+                fill: #F3DEB2;
+            }
+
+            .boundary {
+                fill: none;
+                stroke: #999;
+                stroke-width: .5px;
+            }
+            .image {
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                height: 200px;
+                width: 200px;
+            }
+            #samantha_profile_pic {
+                height: 200px;
+                width: 200px;
+                background-image: url("images/sam_profie_pic.jpeg");
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #welcome {
+                background-image: url("images/cover_samanthacristoforetti_.jpg");
+                background-attachment: fixed;
+                color: rgb(56, 99, 215);
+                height: 80%;
+                width: 100%;
+                font-size: 450%;
+                font-weight: bolder;
+                text-align: center;
+                box-shadow: 10px 10px 5px #888888;
+                font-family: "Merriweather Sans", serif;
+            }
+            #content {
+                height: 100%;
+            }
+            #social_media {
+                background-color: rgb(56, 99, 215);
+                height: 20%;
+                width: 100%;
+                box-shadow: 10px 10px 5px #888888;
+            }
+
+            #social_media img {
+                /*margin-top: 30px;*/
+                padding: 20px 30px;
+            }
+            #media-links {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .content {
+                height: 110%;
+                width: 100%;
+                /*padding: 100px;*/
+            }
+            .overlay {
+                background-color: rgba(73, 107, 132, .8);
+                height: 100%;
+                width: 100%;
+            }
+            #tweetContainer.overlay {
+                background-color: rgb(190, 74, 58);
+                box-shadow: 10px 10px 5px #888888;
+
+            }
+            input[type="range"] {
+                padding: 15px 0px;
+            }
+            button {
+                min-width: 100px;
+                min-height: 40px;
+                padding: 10px;
+                background-color: rgb(190, 74, 58);
+                border-style: solid;
+                border-color: rgb(240, 240, 240);
+                padding-left: 6px;
+                border-width: thin;
+                color: white;
+            }
+
+            button:hover{
+                border-color: rgb(190, 74, 58); 
+                background-color: rgb(240, 240, 240);
+                color: rgb(190, 74, 58);
+            }
+            a {
+                color: rgb(36, 79, 195);
+            }
+        </style>
+        <script>
+            window.twttr = (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0],
+                    t = window.twttr || {};
+
+                if (d.getElementById(id)) return t;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+
+                t._e = [];
+                t.ready = function(f) {
+                    t._e.push(f);
+                };
+             
+                return t;
+            }(document, "script", "twitter-wjs"));
+        </script>
+    </head>
+    <body>
+
+        <div id="welcome" class="image">
+            <div class="overlay">
+                <h1>Welcome to the world of Samantha Cristoforetti.</h1>
+            </div>
+        </div>
+        <div id="social_media">
+            <div id="media-links">
+                <a href="http://twitter.com/AstroSamantha" target="_blank"><img src="images/twitter.png"></a>
+                <a href="https://www.facebook.com/ESASamanthaCristoforetti" target="_blank"><img src="images/facebook.png"></a>
+                <a href="http://www.flickr.com/photos/astrosamantha" target="_blank"><img src="images/flickr.png"></a>
+                <a href="https://plus.google.com/u/0/b/100720077817157516563/+SamanthaCristoforetti/posts" target="_blank"><img src="images/google.png"></a>
+            </div>
+        </div>
+        <div id="content">
+    		<div id="tweetContainer" class="overlay">
+                <div id="about">
+                    <h2>Meet Samantha Cristoforetti, an astronaut who has spent more than 5 months on the International Space Station!</h2>
+                    <div class="image" id="samantha_profile_pic"></div>
+                    <h3 id="sam_explained">
+                        Samantha is a European Space Agency (ESA) astronaut who works as a Flight Engineer for Expeditions 42 and 43 of the International Space Station.
+                        In between her shifts on the ISS, Samantha is extremely active on social media sites, especially <a target="_blank" href="https://twitter.com/AstroSamantha">Twitter</a>! 
+
+                        <br><br>To learn more about Samantha's work, experiences, and much more, you can visit her <a target="_blank" href="http://samanthacristoforetti.esa.int/">ESA website</a>.
+
+                        <br><br>In the meantime, feel free to orbit around the earth with her, and see what she tweets along the way!
+                    </h3>
+                </div>
+                <div id="displayTweet"></div>
+    		</div>
+            <div id="main">
+    			<script>
+    			var width = 1000,
+    				height = 550;
+    			var svg = d3.select("#main").append("svg")
+    				.attr("width", width)
+    				.attr("height", height);
+    			</script>
+                <!-- Shows the selected day as a string -->
+                <p id="selectedDate"></p>
+                <!-- Slider to pick a day from the data -->
+                <input type="range" id="days" class="range" min="0" value="0" oninput="setDate(this.value)"/><br />
+                <!-- Shows the selected time as a string -->
+                <p id="selectedTime"></p>
+                <!-- Slider to pick a time from the current day's data -->
+                <input type="range" id="times" class="range" min="0" value="0" oninput="setTime(this.value)"/><br />
+                <p>Set Play Speed</p>
+                <!-- Slider to control the speed of the play function -->
+                Slow&nbsp;<input type="range" id="speed" class="range" min="0" max="200" value="100"/>&nbsp;Fast<br />
+                <!-- Button to cause the sliders to automatically advance at the chosen speed -->
+                <button type="button" id="play" onclick="forward=setTimeout('moveForward()', speedScale($('#speed').val()));">Play</button>
+                <!-- Button to stop sliders automatically advancing, hidden by default -->
+                <button type="button" style="display: none" id="pause" onclick="pause(forward)">Pause</button>
+                <button type="button" id="showOrbits" onclick="showOrbit()" style="display:none">Show Only the Current Orbit</button>
+                <button type="button" id="showDay" onclick="showDay()" style="">Show All Orbits for the Selected Day</button>
+                <script> // Everything involving tweets
+                // Raw data from tweets_timestamps_html.json
+                var tweets;
+                // An object that manages displaying tweets
+                var tweetHandler;
+
+                $("#days").on("input change", function() {
+                    tweetHandler.removeTweets();
+                });
+
+                $("#times").on("input change", function() {
+                    tweetHandler.serveTweets(current);
+                    document.getElementById("about").style.display = 'none';
+                    tweetHandler.plotTweets();
+                });
+                </script>
+
+                <script>
+                //current orbit
+                var current;
+                // current day
+                var day;
+                //the unabridged date from fisOrbits
+                var orbitData;
+                //the orbits group by day
+                var orbits = {};
+                //orbits in array form
+                var orbitArr = [];
+
+                d3.json("friends-in-space-data/fisOrbits.json", function (data) {
+                    orbitData = data;
+                    //organizes data by day.  starts by taking each element of the array in fisOrbits
+                    orbitData.forEach(function(d){
+                        //variable to allow the coordinates for each day to be matched to the correct timestamp
+                        var i = 0;
+                        //individually assesses and organizes each timestamp for the selected entry.  uses i to track corresponding coordinates
+                        var orbitID = d.orbitId;
+                        var orbitStart = d.start;
+                        d.orbit.timestamps.forEach(function(e){
+                            var date = new Date(e);
+                            //string to check for existing day entry
+                            var dstring = date.getUTCFullYear() + ', ' + date.getUTCMonth() + ', ' + date.getUTCDate();
+                            //checks if entry exists for current data's timestamp
+                            if(orbits[dstring]){
+                                //pushes a new "orbit" to the current day
+                                orbits[dstring].push({'date':date, 'coords':d.orbit.coordinates[i], 'id':orbitID, 'start':orbitStart});
+                            }
+                            else{
+                                //creates an entry for the current day
+                                orbits[dstring] = [];
+                                //pushes a new "orbit" to the current day
+                                orbits[dstring].push({'date':date, 'coords':d.orbit.coordinates[i], 'id':orbitID, 'start':orbitStart});
+                            }
+                            i++;
+                        });
+            
+                    });
+                    //outputs orbits as orbitArr
+                    $.each(orbits, function(d, e){
+                            orbitArr.push(e);
+                    });
+                    //initialization call
+                    setDefault();
+
+                    // Read tweet data
+                    d3.json("relevant_tweets_coords.json", function (ts) {
+                        tweetHandler = TweetHandler(ts);
+                    });
+                });
+                //initialize interface
+                function setDefault(){
+                    //Max value of days initialized to number of days in the data -1
+                    $("#days").attr("max", orbitArr.length - 1);
+                    //Max value of times initialized to number of times in first day -1
+                    $("#times").attr("max", orbitArr[0].length - 1);
+                    //Sets text to first day and time respectively
+                    $("#selectedDate").text(orbitArr[$('#days').val()][$('#times').val()].date.toDateString());
+                    $("#selectedTime").text(orbitArr[$('#days').val()][$('#times').val()].date.toTimeString());
+                    //initializes current
+                    current = orbitArr[$('#days').val()][$('#times').val()];
+                    day = {
+                        date : current.date,
+                        onChange : function() {
+                        },
+                    };
+                    if(show1Orbit){
+                        plotCurOrbit();
+                    }
+                    else{
+                        plotDayTrace();
+                    }
+                }
+                </script>
+                <script>
+                //currently using kavrayskiy projection for 2D
+                var projection = d3.geo.kavrayskiy7()
+                    .scale(170)
+                    .translate([width / 2, height / 2])
+                    .precision(.1);
+
+                var path = d3.geo.path()
+                    .projection(projection);
+
+                var graticule = d3.geo.graticule();
+
+                svg.append("defs").append("path")
+                    .datum({type: "Sphere"})
+                    .attr("id", "sphere")
+                    .attr("d", path);
+
+                svg.append("use")
+                    .attr("class", "stroke")
+                    .attr("xlink:href", "#sphere");
+
+                svg.append("use")
+                    .attr("class", "fill")
+                    .attr("xlink:href", "#sphere");
+
+                svg.append("path")
+                    .datum(graticule)
+                    .attr("class", "graticule")
+                    .attr("d", path);
+                d3.json("world-50m.json", function(error, world) {
+                  svg.insert("path", ".graticule")
+                      .datum(topojson.feature(world, world.objects.land))
+                      .attr("class", "land")
+                      .attr("d", path);
+
+                  svg.insert("path", ".graticule")
+                      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+                      .attr("class", "boundary")
+                      .attr("d", path);
+                });
+
+                d3.select(self.frameElement).style("height", height + "px");
+    			
+    			function removeMiddle() {
+    				var win = $('#content').width() - 20;
+    				var tweetWidth = 500;
+    				var mainWidth = 1000;
+    				var extraWidth = win - tweetWidth - mainWidth;
+    				if(win > 1500){
+    					$('#tweetContainer').width(tweetWidth + Math.floor(extraWidth / 2) -40);
+    					$('#displayTweet').width(500);
+    					$('#main').width(mainWidth + Math.floor(extraWidth / 2));
+    				}
+    				else {
+    					$('#tweetContainer').width(win - mainWidth - 40);
+    					$('#displayTweet').width(win - mainWidth -40);
+    					$('#main').width(mainWidth);
+    				}
+    			}
+    			window.onload = function(){
+    				removeMiddle();
+    			}
+    			$(window).resize(function(){
+    				removeMiddle();
+    			});
+    			
+                </script>
+            </div>
+        </div>
+    </body>
+</html>
