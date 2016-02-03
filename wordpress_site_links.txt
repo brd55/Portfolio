@@ -1,0 +1,3 @@
+Through my professional work, I've built several sites for clients using WordPress.  This includes structuring site elements and styles to meet the client's needs and wants across a variety of platforms while maintaining modularity, as well as adding functionality through custom scripts and by adding and modifying plugins.  Below I have listed a link for one such site.  
+
+http://karmafoodsandwellness.com/
