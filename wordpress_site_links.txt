@@ -1,5 +1,11 @@
 Through my professional work, I've built several sites for clients using WordPress.  This includes structuring site elements and using styles to meet the client's needs and wants across a variety of platforms. This also includes adding functionality through custom scripts and by adding and modifying plugins, all while striving to create a robust and user-friendly system.  Below I have listed links with examples of my work.  
 
+While at Nessit:
+https://www.erp-power.com/
+https://www.directdefense.com/
+https://www.ambient-env.com/
+
+While at Paraclete Press: 
 http://karmafoodsandwellness.com/
 https://readypublication.com/
 http://chathamlabyrinth.com/
